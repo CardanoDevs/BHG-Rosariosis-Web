@@ -1,0 +1,18 @@
+[30-Oct-2020 02:52:03 CST6CDT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/customer/www/stratusarchives.com/public_html/assignment/api/Grades.php on line 66
+[30-Oct-2020 02:52:11 CST6CDT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/customer/www/stratusarchives.com/public_html/assignment/api/Grades.php on line 66
+[30-Oct-2020 02:52:15 CST6CDT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/customer/www/stratusarchives.com/public_html/assignment/api/Grades.php on line 66
+[30-Oct-2020 02:52:19 CST6CDT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/customer/www/stratusarchives.com/public_html/assignment/api/Grades.php on line 66
+[30-Oct-2020 02:52:22 CST6CDT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/customer/www/stratusarchives.com/public_html/assignment/api/Grades.php on line 66
+[30-Oct-2020 02:52:24 CST6CDT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/customer/www/stratusarchives.com/public_html/assignment/api/Grades.php on line 66
+[19-Nov-2020 00:10:25 CST6CDT] PHP Fatal error:  Uncaught Error: Call to undefined function PerformInitialAuthChecks() in /home/customer/www/stratusarchives.com/public_html/assignment/api/Quiz.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/stratusarchives.com/public_html/assignment/api/Quiz.php on line 14
+[19-Nov-2020 00:23:29 CST6CDT] PHP Fatal error:  Uncaught Error: Call to undefined function PerformInitialAuthChecks() in /home/customer/www/stratusarchives.com/public_html/assignment/api/Quiz.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/stratusarchives.com/public_html/assignment/api/Quiz.php on line 14
+[19-Nov-2020 00:27:41 CST6CDT] PHP Fatal error:  Uncaught Error: Call to undefined function PerformInitialAuthChecks() in /home/customer/www/stratusarchives.com/public_html/assignment/api/Quiz.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/stratusarchives.com/public_html/assignment/api/Quiz.php on line 14
