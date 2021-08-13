@@ -59,7 +59,7 @@ if (($student_id > 0) && isset($_GET['course_period_id'])) {
 
             $assignments[$key]['IS_QUIZ'] = $assignments[$key]['IS_QUIZ'] === "1";
 
-            $assignments[$key]['DESCRIPTION'] = strip_tags($assignments[$key]['DESCRIPTION']);
+            $assignments[$key]['DESCRIPTION'] = $assignments[$key]['DESCRIPTION'];
             $assignments[$key]['IS_CHECKED'] = isset($assignments[$key]['POINTS_EARNED']);
 
             $percentage = $assignments[$key]['POINTS_EARNED'] / $assignments[$key]['POINTS'];
