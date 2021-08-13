@@ -1683,48 +1683,17 @@ if ( ! empty( $_REQUEST['values'] )
 			}
 
 			$sql = '';
-			
-			////////////////////
-			
-
-			if ( !$columns['FILE'] )
-			{		
-
-				if ( isset( $_FILES["FILE".$student_id."_".$assignment_id] ) )
-				{
-					for($idx=0; $idx<count($_FILES["FILE".$student_id."_".$assignment_id]['name']); $idx++){
-					
-						$file_id = DBSeqNextID( 'GRADEBOOK_MARKED_ASSIGNMENT_FILES_SEQ' );
-
-						$file = UploadMarkedAssignmentFile(
-							$assignment_id, User( 'STAFF_ID' ), $student_id,"FILE".$student_id."_".$assignment_id, $idx,$file_id );
-
-						if ( $file )
-						{
-							DBQuery( "INSERT INTO GRADEBOOK_MARKED_ASSIGNMENT_FILES (ASSIGNMENT_FILE_ID,STUDENT_ID,ASSIGNMENT_ID,FILE) values('" . $file_id . "','" . $student_id . "','" . $assignment_id . "','" .$file. "')");
-							
-						}
-					}
-				}
-			
-			}
-			
-			
-			////////////////////
 
 			if ( $current_RET[$student_id][$assignment_id] )
 			{
-				if(count($columns)>1){
-					$sql = "UPDATE GRADEBOOK_GRADES SET ";
+				$sql = "UPDATE GRADEBOOK_GRADES SET ";
 
-					foreach ( (array) $columns as $column => $value )
-					{
-						if(strtoupper($column)=="TMP") continue;
-						$sql .= DBEscapeIdentifier( $column ) . "='" . $value . "',";
-					}
-
-					$sql = mb_substr( $sql, 0, -1 ) . " WHERE STUDENT_ID='" . $student_id . "' AND ASSIGNMENT_ID='" . $assignment_id . "' AND COURSE_PERIOD_ID='" . UserCoursePeriod() . "'";
+				foreach ( (array) $columns as $column => $value )
+				{
+					$sql .= DBEscapeIdentifier( $column ) . "='" . $value . "',";
 				}
+
+				$sql = mb_substr( $sql, 0, -1 ) . " WHERE STUDENT_ID='" . $student_id . "' AND ASSIGNMENT_ID='" . $assignment_id . "' AND COURSE_PERIOD_ID='" . UserCoursePeriod() . "'";
 			}
 			elseif ( $columns['POINTS'] != '' || $columns['COMMENT'] )
 			{
@@ -1737,7 +1706,6 @@ if ( ! empty( $_REQUEST['values'] )
 			}
 		}
 	}
-
 
 
 
@@ -3055,7 +3023,6 @@ if ( UserStudentID() )
 		'POINTS' => _( 'Points' ),
 		'COMMENT' => _( 'Comment' ),
 		'SUBMISSION' => _( 'Submission' ),
-		'UPLOAD' => _( 'Return Assignment' ),
 	);
 
 	// modif Francois: display percent grade according to Configuration.
@@ -3092,7 +3059,7 @@ if ( UserStudentID() )
 
 	$count_assignments = count( (array) $assignments_RET );
 
-	$extra['SELECT'] = ",ga.ASSIGNMENT_TYPE_ID,ga.ASSIGNMENT_ID,ga.TITLE,ga.POINTS AS TOTAL_POINTS, ga.FILE as UPLOAD,
+	$extra['SELECT'] = ",ga.ASSIGNMENT_TYPE_ID,ga.ASSIGNMENT_ID,ga.TITLE,ga.POINTS AS TOTAL_POINTS,
 		ga.SUBMISSION,'' AS PERCENT_GRADE,'' AS LETTER_GRADE,
 		CASE WHEN (ga.ASSIGNED_DATE IS NULL OR CURRENT_DATE>=ga.ASSIGNED_DATE)
 			AND (ga.DUE_DATE IS NULL OR CURRENT_DATE>=ga.DUE_DATE)
@@ -3124,7 +3091,6 @@ if ( UserStudentID() )
 		'PERCENT_GRADE' => '_makeExtraStuCols',
 		'LETTER_GRADE' => '_makeExtraStuCols',
 		'COMMENT' => '_makeExtraStuCols',
-		'UPLOAD' => '_makeExtraStuCols',
 		'SUBMISSION' => 'MakeStudentAssignmentSubmissionView',
 	);
 }
@@ -3205,7 +3171,6 @@ else
 			'PERCENT_GRADE' => '_makeExtraAssnCols',
 			'LETTER_GRADE' => '_makeExtraAssnCols',
 			'COMMENT' => '_makeExtraAssnCols',
-			'UPLOAD' => '_makeExtraAssnCols',
 			'SUBMISSION' => 'MakeStudentAssignmentSubmissionView',
 		);
 
@@ -3475,7 +3440,7 @@ if(empty($_REQUEST['assignment_id'])) {
 	fixVerticalTabindex('.list-wrapper .list tbody');
 </script>
 <?php
-$ceva='var popup = window.open("https://stratusarchives.com/rosariosisdemo/Modules.php?modname=Grades/InputFinalGrades.php&include_inactive=&modfunc=gradebook&mp=6&exec=1", "Popup", "left=10000,top=10000,width=100,height=100");
+$ceva='var popup = window.open("localhost/rosario/Modules.php?modname=Grades/InputFinalGrades.php&include_inactive=&modfunc=gradebook&mp=6&exec=1", "Popup", "left=10000,top=10000,width=100,height=100");
 setTimeout(function () {
        popup.close()
     },2000);';
@@ -3965,57 +3930,6 @@ function _makeExtraStuCols( $value, $column )
 				' maxlength=100'
 			);
 			break;
-			
-			case 'UPLOAD':
-	
-	//GetInputID('tables[' . $_REQUEST['assignment_id'] . '][SUBMISSION]').'\')
-	
-			$markedassigns_column_html = '';
-			$markedAssignments = DBGet( "SELECT ma.FILE
-				FROM GRADEBOOK_MARKED_ASSIGNMENT_FILES ma
-				WHERE ma.ASSIGNMENT_ID='" . $THIS_RET['ASSIGNMENT_ID'] . "'
-				AND ma.STUDENT_ID='" . $THIS_RET['STUDENT_ID'] . "'"
-			);
-			
-			
-			
-			foreach((array)$markedAssignments as $markedAssignment){
-				$filelink = GetAssignmentFileLink( $markedAssignment['FILE'] );
-				if(!empty($filelink))
-				$markedassigns_column_html .= '<br/>'.GetAssignmentFileLink( $markedAssignment['FILE'] );
-			}
-			
-			$browsebutton = '
-				<script>
-					$(document).ready(function(){
-						
-						$(\'.wrapper'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'\').each(function() {
-							var $wrapper = $(\'.'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-fields\', this);
-							$(".'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'add-field", $(this)).click(function(e) {
-								$(\'.'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-field:first-child\', $wrapper).clone(true).appendTo($wrapper).find(\'input\').val(\'\').focus();
-							});
-							$(\'.'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-field .remove-field\', $wrapper).click(function() {
-								if ($(\'.'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-field\', $wrapper).length > 1)
-									$(this).parent(\'.'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-field\').remove();
-							});
-						});
-					});
-				</script>
-		
-				<div class="wrapper'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'">
-				<div class="'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-fields">
-				<div class="'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'multi-field">
-				  '.FileInput( 'FILE'. $THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID'] . '[]', _( '' ))
-				  . '
-				</div>
-				</div>
-				<button type="button" class="'.GetInputID($THIS_RET['STUDENT_ID'] .'_'. $THIS_RET['ASSIGNMENT_ID']).'add-field">+</button>'.$markedassigns_column_html.'
-				</div>
-				<input type="hidden" name="'.'values[' . $THIS_RET['STUDENT_ID'] . '][' . $THIS_RET['ASSIGNMENT_ID'] . '][TMP]'.'" value="true"/>
-				';
-			return $browsebutton;
-			
-			break;	
 	}
 }
 

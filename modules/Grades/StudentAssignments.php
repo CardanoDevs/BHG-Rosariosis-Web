@@ -52,22 +52,6 @@ if ( isset( $_REQUEST['assignment_id'] )
 	$_ROSARIO['allow_edit'] = true;
 
 	$form_action = PreparePHP_SELF( $_REQUEST, array(), array( 'modfunc' => 'submit' ) );
-	
-	
-	echo '<script>
-		$(document).ready(function(){		
-			$(\'.multi-field-wrapper\').each(function() {
-				var $wrapper = $(\'.multi-fields\', this);
-				$(".add-field", $(this)).click(function(e) {
-					$(\'.multi-field:first-child\', $wrapper).clone(true).appendTo($wrapper).find(\'input\').val(\'\').focus();
-				});
-				$(\'.multi-field .remove-field\', $wrapper).click(function() {
-					if ($(\'.multi-field\', $wrapper).length > 1)
-						$(this).parent(\'.multi-field\').remove();
-				});
-			});
-		});
-	</script>';
 
 	echo '<form method="POST" action="">';
 

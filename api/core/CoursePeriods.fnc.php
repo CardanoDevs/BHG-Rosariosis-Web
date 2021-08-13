@@ -81,7 +81,7 @@ function GetCoursePercentage($course_period_id, $student_id)
 
     $sql = "select round((sum(innerQuery.percentage) / $getTotalPercentage) * 100) as percentage
     from (
-        select (sum(gg.points) / sum(ga.points)) * (gat.final_grade_percent * 100) as percentage
+        select (sum(gg.points) / sum(ga.points)) * (sum(gat.final_grade_percent) * 100) as percentage
         from gradebook_assignments ga, gradebook_grades gg, gradebook_assignment_types gat
         where ga.assignment_id = gg.assignment_id
         and ga.course_period_id  = gg.course_period_id
@@ -108,7 +108,7 @@ function GetTotalPercentage($course_period_id, $student_id)
 
     $sql = "select sum(innerquery.final_grade_percent) * 100 as total_percentage
         from (
-            select gat.final_grade_percent
+            select sum(gat.final_grade_percent) as final_grade_percent
             from gradebook_assignments ga, gradebook_grades gg, gradebook_assignment_types gat
             where ga.assignment_id = gg.assignment_id
             and ga.course_period_id  = gg.course_period_id

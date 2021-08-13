@@ -42,7 +42,6 @@ if ( UserStudentID()
 
 	if ( empty( $_REQUEST['id'] ) )
 	{
-		echo "entering here";
 		DrawHeader( _( 'Totals' ), '<a href="Modules.php?modname=' . $_REQUEST['modname'] . '&id=all' . ( $do_stats ? '&do_stats=' . $_REQUEST['do_stats'] : '' ) . '">' . _( 'Expand All' ) . '</a>' );
 
 		if ( $do_stats )
@@ -400,8 +399,7 @@ if ( UserStudentID()
 						$LO_columns['LETTER'] = _( 'Letter' );
 					}
 				}
-                $LO_columns += array( 'MARKEDASIGNS' => _( '' ));
-				
+
 				$LO_columns += array( 'COMMENT' => _( 'Comment' ) );
 
 				if ( $do_stats && $_REQUEST['do_stats'] )
@@ -450,19 +448,6 @@ if ( UserStudentID()
 							$bargraph2 = bargraph2( false );
 						}
 					}
-					
-                    $markedassigns_column_html = '';
-					$markedAssignments = DBGet( "SELECT ma.FILE
-						FROM GRADEBOOK_MARKED_ASSIGNMENT_FILES ma
-						WHERE ma.ASSIGNMENT_ID='" . $assignment['ASSIGNMENT_ID'] . "'
-						AND ma.STUDENT_ID='" . UserStudentID() . "'"
-					);
-					
-					foreach((array)$markedAssignments as $markedAssignment){
-						$filelink = GetAssignmentFileLink( $markedAssignment['FILE'] );
-						if(!empty($filelink))
-						$markedassigns_column_html .= "<br/>".$filelink ;
-					}
 
 					$LO_ret[] = array(
 						'TITLE' => $assignment['TITLE'],
@@ -489,7 +474,6 @@ if ( UserStudentID()
 										$staff_id
 									) . '</b>' :
 									'' ) ) ),
-									'MARKEDASIGNS' => $markedassigns_column_html,
 						'COMMENT' => $assignment['COMMENT'] . ( $assignment['POINTS'] == '' ?
 							( $assignment['COMMENT'] ? '<br />' : '' ) .
 							'<span style="color:red">' . _( 'No Grade' ) . '</span>' :
