@@ -451,10 +451,10 @@ function FilesUploadUpdate( $table, $request, $path )
  */
 function no_accents( $string )
 {
-	if ( ! preg_match( '/[\x80-\xff]/', $string) )
-	{
-		return $string;
-	}
+	// if ( ! preg_match( '/[\x80-\xff]/', $string) )
+	// {
+	// 	return $string;
+	// }
 
 	if ( function_exists( 'transliterator_transliterate' ) )
 	{
