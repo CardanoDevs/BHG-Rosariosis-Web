@@ -688,7 +688,7 @@ function GetAssignmentsFilesPath($teacher_id)
 
  */
 
-function UploadAssignmentTeacherFile($assignment_id, $teacher_id, $file_input_id)
+function UploadAssignmentTeacherFile($assignment_id, $teacher_id, $file_input_id, $idx, $id)
 
 {
 
@@ -726,7 +726,7 @@ function UploadAssignmentTeacherFile($assignment_id, $teacher_id, $file_input_id
 
     // Upload file to AssignmentsFiles/[School_Year]/Teacher[teacher_ID]/Quarter[1,2,3,4...]/.
 
-    $file = FileUpload(
+    $file = MultiFileUpload(
 
         $file_input_id,
 
@@ -740,7 +740,9 @@ function UploadAssignmentTeacherFile($assignment_id, $teacher_id, $file_input_id
 
         '',
 
-        $file_name_no_ext
+        $file_name_no_ext,
+
+        $idx
 
     );
 
@@ -749,6 +751,59 @@ function UploadAssignmentTeacherFile($assignment_id, $teacher_id, $file_input_id
 
 }
 
+function MultiFileUpload($input, $path, $ext_white_list, $size_limit, &$error, $final_ext = '', $file_name_no_ext = '', $i)
+{
+    $file_name = $full_path = false;
+
+    if (!$final_ext) {
+        $final_ext = mb_strtolower(mb_strrchr($_FILES[$input]['name'][$i], '.'));
+    }
+
+    if ($file_name_no_ext) {
+        $file_name = $file_name_no_ext . $final_ext;
+    }
+
+    if (!is_uploaded_file($_FILES[$input]['tmp_name'][$i])) {
+        // Check the post_max_size & php_value upload_max_filesize values in the php.ini file.
+        $error[] = _('File not uploaded');
+    } elseif (!in_array(mb_strtolower(mb_strrchr($_FILES[$input]['name'][$i], '.')), $ext_white_list)) {
+        $error[] = sprintf(
+            _('Wrong file type: %s (%s required)'),
+            $_FILES[$input]['type'][$i],
+            implode(', ', $ext_white_list)
+        );
+    } elseif ($size_limit
+        && $_FILES[$input]['size'][$i] > $size_limit * 1024 * 1024) {
+        $error[] = sprintf(
+            _('File size > %01.2fMb: %01.2fMb'),
+            $size_limit,
+            ($_FILES[$input]['size'][$i] / 1024) / 1024
+        );
+    } // If folder doesnt exist, create it!
+    elseif (!is_dir($path)
+        && !mkdir($path, 0755, true)) // Fix shared hosting: permission 755 for directories.
+    {
+        $error[] = sprintf(_('Folder not created') . ': %s', $path);
+    } elseif (!is_writable($path)) {
+        // See PHP / Apache user rights for folder.
+        $error[] = sprintf(_('Folder not writable') . ': %s', $path);
+    } // Store file.
+    elseif (!move_uploaded_file(
+        $_FILES[$input]['tmp_name'][$i],
+        $full_path = ($path . ($file_name ?
+                $file_name :
+                no_accents(mb_substr(
+                    $_FILES[$input]['name'][$i],
+                    0,
+                    mb_strrpos($_FILES[$input]['name'][$i], '.')
+                )) . $final_ext
+            ))
+    )) {
+        $error[] = sprintf(_('File invalid or not moveable') . ': %s', $_FILES[$input]['tmp_name'][$i]);
+    }
+
+    return $full_path;
+}
 
 function StudentAssignmentsListOutput()
 
@@ -1056,11 +1111,15 @@ function MakeStudentAssignmentSubmissionView($value, $column)
 
 			<div id="submission' . $THIS_RET['ASSIGNMENT_ID'] . '-' . $student_id . '">' .
 
-            NoInput($date, _('Submission date')) . '<br />' .
+            NoInput($date, _('Submission date')) . '<br />';
+            if($file) {
+                foreach($data['files'] as $each_file) {
+                    $submission_column_html .= NoInput(GetAssignmentFileLink($each_file), '<br />');
+                }
+            }
 
-            NoInput(GetAssignmentFileLink($file), _('File')) .
 
-            $message . FormatInputTitle(_('Message'), '', false, '') .
+            $submission_column_html .= $message .'<br/>'. FormatInputTitle(_('Message'), '', false, '') .
 
             '</div></div>';
 
