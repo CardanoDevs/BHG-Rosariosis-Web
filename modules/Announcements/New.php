@@ -178,16 +178,16 @@ function sendNotificationForGrade($announcement_id, $grade_id, $send_to_parent =
         $sql = "insert into announcement_audience (user_id, announcement_id)
                 with students_ctx as (
                     select se.student_id
-                    from student_enrollment se, user_fcm_tokens uft
-                    where se.student_id = uft.user_id
-                    and se.grade_id = $grade_id
+                    from student_enrollment se
+                    where se.grade_id = $grade_id
+                    and se.syear = ".UserSyear()."
                 ),
                 parents_ctx as (
                     select sju.staff_id
-                    from student_enrollment se, students_join_users sju, user_fcm_tokens uft
+                    from student_enrollment se, students_join_users sju
                     where se.student_id = sju.student_id
-                    and sju.staff_id = uft.user_id
                     and se.grade_id = $grade_id
+                    and se.syear = ".UserSyear()."
                 )
                 select parents_ctx.staff_id as user_id, $announcement_id as announcement_id
                 from parents_ctx
@@ -197,9 +197,9 @@ function sendNotificationForGrade($announcement_id, $grade_id, $send_to_parent =
     } else {
         $sql = "insert into announcement_audience (user_id, announcement_id)
                 select se.student_id, $announcement_id as announcement_id
-                from student_enrollment se, user_fcm_tokens uft
-                where se.student_id = uft.user_id
-                and se.grade_id = $grade_id";
+                from student_enrollment se
+                where se.grade_id = $grade_id
+                and se.syear = ".UserSyear();
     }
 
     DBQuery($sql);
@@ -211,18 +211,30 @@ function sendNotificationToAllAppStudents($announcement_id, $send_to_parent = fa
 
     $announcement_id = DBEscapeString($announcement_id);
 
-    if ($send_to_parent) {
-        $sql = "insert into announcement_audience (user_id, announcement_id) 
-                select user_id, $announcement_id as announcement_id 
-                from user_fcm_tokens";
-    } else {
-        $sql = "insert into announcement_audience (user_id, announcement_id) 
-                select uft.user_id, $announcement_id as announcement_id 
-                from user_fcm_tokens uft, students s
-                where s.student_id = uft.user_id";
-    }
-
-    DBQuery($sql);
+    // if ($send_to_parent) {
+    //     $sql = "insert into announcement_audience (user_id, announcement_id) 
+    //             select user_id, $announcement_id as announcement_id 
+    //             from user_fcm_tokens";
+    // } else {
+    //     $sql = "insert into announcement_audience (user_id, announcement_id) 
+    //             select uft.user_id, $announcement_id as announcement_id 
+    //             from user_fcm_tokens uft, students s
+    //             where s.student_id = uft.user_id";
+    // }
+    $sql = "insert into announcement_audience (user_id, announcement_id) 
+                select enroll.student_id, $announcement_id as announcement_id 
+                from student_enrollment enroll, students s
+                where s.student_id = enroll.student_id
+                    AND enroll.syear=".UserSyear();
+        DBQuery($sql);
+    
+        if($send_to_parent) {
+            $sql = "insert into announcement_audience (user_id, announcement_id) 
+                        select staff_id, $announcement_id as announcement_id 
+                        from staff 
+                        WHERE profile='parent' AND syear=".UserSyear();
+            DBQuery($sql);
+     }
 }
 
 function createAnnouncement($title, $message, $type)
