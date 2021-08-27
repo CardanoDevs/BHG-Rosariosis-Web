@@ -175,7 +175,7 @@ function sendNotificationForGrade($announcement_id, $grade_id, $send_to_parent =
     $grade_id = DBEscapeString($grade_id);
 
     if ($send_to_parent) {
-        $sql = "insert into announcement_audience (user_id, announcement_id)
+        $sql = "insert into announcement_audience (user_id, announcement_id, is_student)
                 with students_ctx as (
                     select se.student_id
                     from student_enrollment se
@@ -189,10 +189,10 @@ function sendNotificationForGrade($announcement_id, $grade_id, $send_to_parent =
                     and se.grade_id = $grade_id
                     and se.syear = ".UserSyear()."
                 )
-                select parents_ctx.staff_id as user_id, $announcement_id as announcement_id
+                select parents_ctx.staff_id as user_id, $announcement_id as announcement_id, FALSE as is_student
                 from parents_ctx
                 union
-                select students_ctx.student_id as user_id, $announcement_id as announcement_id
+                select students_ctx.student_id as user_id, $announcement_id as announcement_id, TRUE as is_student
                 from students_ctx";
     } else {
         $sql = "insert into announcement_audience (user_id, announcement_id)
@@ -221,16 +221,16 @@ function sendNotificationToAllAppStudents($announcement_id, $send_to_parent = fa
     //             from user_fcm_tokens uft, students s
     //             where s.student_id = uft.user_id";
     // }
-    $sql = "insert into announcement_audience (user_id, announcement_id) 
-                select enroll.student_id, $announcement_id as announcement_id 
+    $sql = "insert into announcement_audience (user_id, announcement_id, is_student) 
+                select enroll.student_id, $announcement_id as announcement_id , TRUE as is_student
                 from student_enrollment enroll, students s
                 where s.student_id = enroll.student_id
                     AND enroll.syear=".UserSyear();
         DBQuery($sql);
     
         if($send_to_parent) {
-            $sql = "insert into announcement_audience (user_id, announcement_id) 
-                        select staff_id, $announcement_id as announcement_id 
+            $sql = "insert into announcement_audience (user_id, announcement_id, is_student) 
+                        select staff_id, $announcement_id as announcement_id, FALSE as is_student
                         from staff 
                         WHERE profile='parent' AND syear=".UserSyear();
             DBQuery($sql);
