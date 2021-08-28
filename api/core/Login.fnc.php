@@ -2,11 +2,12 @@
 
 function GetParentLogin($username, $password)
 {
-
+    global $DefaultSyear;
+    
     $sql = "SELECT s.USERNAME, s.PROFILE, s.STAFF_ID as USER_ID, s.PASSWORD, 
     s.FIRST_NAME, s.LAST_NAME, s.TITLE 
 	FROM STAFF s 
-	WHERE UPPER(s.USERNAME)=UPPER('" . $username . "') and s.PROFILE = 'parent'";
+	WHERE UPPER(s.USERNAME)=UPPER('" . $username . "') and s.PROFILE = 'parent' and s.syear = ".$DefaultSyear;
 
     $login_RET = DBGet($sql);
 

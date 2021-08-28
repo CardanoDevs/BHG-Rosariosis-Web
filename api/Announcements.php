@@ -17,26 +17,30 @@ PerformInitialAuthChecks();
 
 $user = GetAuthData();
 
-$student_ids = [];
+// $student_ids = [];
+// error_log(json_encode($user->USER));
+// if ($user->USER->PROFILE == 'student') {
+//     $student_ids[] = $user->USER->USER_ID;
+// } else {
 
-if ($user->USER->PROFILE == 'student') {
-    $student_ids[] = $user->USER->USER_ID;
+//     $students = (array)$user->USER->STUDENTS;
+
+//     if ($students) {
+
+//         $student_ids = array_map(function ($item) {
+//             return $item->STUDENT_ID;
+//         }, $students);
+
+//     }
+
+// }
+if($user->USER->PROFILE == 'student') {
+    $is_student = 'TRUE';
 } else {
-
-    $students = (array)$user->USER->STUDENTS;
-
-    if ($students) {
-
-        $student_ids = array_map(function ($item) {
-            return $item->STUDENT_ID;
-        }, $students);
-
-    }
-
+    $is_student = 'FALSE';
 }
-
-$data = GetUserAnnouncements(implode(',', $student_ids));
-
+// $data = GetUserAnnouncements(implode(',', $student_ids));
+$data   = GetUserAnnouncements($user->USER->USER_ID, $is_student);
 if ($data) {
 
     echo ToJSON([
