@@ -181,8 +181,12 @@ function sendNotificationForGrade($announcement_id, $grade_id, $send_to_parent =
                     from student_enrollment se
                     where se.grade_id = $grade_id
                     and se.syear = ".UserSyear()."
-                ),
-                parents_ctx as (
+                )
+                select students_ctx.student_id as user_id, $announcement_id as announcement_id, TRUE as is_student
+                from students_ctx";
+        DBquery($sql);
+        $sql = "insert into announcement_audience (user_id, announcement_id, is_student)
+                with parents_ctx as (
                     select sju.staff_id
                     from student_enrollment se, students_join_users sju
                     where se.student_id = sju.student_id
@@ -190,19 +194,17 @@ function sendNotificationForGrade($announcement_id, $grade_id, $send_to_parent =
                     and se.syear = ".UserSyear()."
                 )
                 select parents_ctx.staff_id as user_id, $announcement_id as announcement_id, FALSE as is_student
-                from parents_ctx
-                union
-                select students_ctx.student_id as user_id, $announcement_id as announcement_id, TRUE as is_student
-                from students_ctx";
+                from parents_ctx";
+        DBquery($sql);
     } else {
         $sql = "insert into announcement_audience (user_id, announcement_id)
                 select se.student_id, $announcement_id as announcement_id
                 from student_enrollment se
                 where se.grade_id = $grade_id
                 and se.syear = ".UserSyear();
+        DBQuery($sql);
     }
 
-    DBQuery($sql);
 
 }
 
