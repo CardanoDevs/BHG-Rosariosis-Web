@@ -104,7 +104,7 @@ function GetAssignmentsFilesPath($teacher_id)
 
 {
 
-    global $AssignmentsFilesPath;
+    global $AssignmentsFilesPath, $DefaultSyear;;
 
     if (!$teacher_id) {
 
@@ -115,8 +115,7 @@ function GetAssignmentsFilesPath($teacher_id)
 
     // File path = AssignmentsFiles/[School_Year]/Quarter[1,2,3,4...]/Teacher[teacher_ID]/.
 
-
-    return $AssignmentsFilesPath . 2019 . '/Quarter' . 4 . '/Teacher' . $teacher_id . '/';
+    return $AssignmentsFilesPath . $DefaultSyear . '/Quarter/Teacher' . $teacher_id . '/';
 
 }
 
