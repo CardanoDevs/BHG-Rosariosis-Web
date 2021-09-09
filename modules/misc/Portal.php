@@ -11,7 +11,7 @@ if ( $RosarioModules['Discipline'] )
 if ( $RosarioModules['Student_Billing'] )
 {
 	// @since 5.4 Student Billing alerts.
-	// require_once 'modules/Student_Billing/includes/PortalAlerts.fnc.php';
+	require_once 'modules/Student_Billing/includes/PortalAlerts.fnc.php';
 }
 
 if ( $_REQUEST['modfunc'] === 'redirect_take_attendance' )
@@ -649,7 +649,7 @@ switch ( User( 'PROFILE' ) )
 					AND acc.SCHOOL_DATE<'" . DBDate() . "'
 					AND cp.CALENDAR_ID=acc.CALENDAR_ID
 					AND (cp.TEACHER_ID='" . User( 'STAFF_ID' ) . "'
-						)
+						OR SECONDARY_TEACHER_ID='" . User( 'STAFF_ID' ) . "')
 					AND cp.MARKING_PERIOD_ID IN (SELECT MARKING_PERIOD_ID FROM SCHOOL_MARKING_PERIODS WHERE (MP<>'PRO') AND SCHOOL_ID=acc.SCHOOL_ID AND acc.SCHOOL_DATE BETWEEN START_DATE AND END_DATE)
 					AND sp.PERIOD_ID=cpsp.PERIOD_ID
 					AND (sp.BLOCK IS NULL AND position(substring('UMTWHFS' FROM cast(extract(DOW FROM acc.SCHOOL_DATE) AS INT)+1 FOR 1) IN cpsp.DAYS)>0 OR (sp.BLOCK IS NOT NULL AND sp.BLOCK=acc.BLOCK))

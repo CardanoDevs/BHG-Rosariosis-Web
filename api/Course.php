@@ -16,6 +16,8 @@ PerformInitialAuthChecks();
 
 $user = GetAuthData();
 
+$schoolID   = $user->USER->SCHOOL_ID;
+
 $student_id = 0;
 
 if (IsParent()) {

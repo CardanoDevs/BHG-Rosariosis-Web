@@ -19,6 +19,7 @@ PerformInitialAuthChecks();
 
 $user = GetAuthData();
 
+$schoolID   = $user->USER->SCHOOL_ID;
 // For students
 if ($user->USER->PROFILE == 'student') {
     $courses = GetCoursePeriodsForStudent($user->USER->USER_ID);

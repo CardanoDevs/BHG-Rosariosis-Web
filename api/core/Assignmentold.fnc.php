@@ -104,7 +104,7 @@ function GetAssignmentsFilesPath($teacher_id)
 
 {
 
-    global $AssignmentsFilesPath, $DefaultSyear, $schoolID;
+    global $AssignmentsFilesPath;
 
     if (!$teacher_id) {
 
@@ -114,14 +114,9 @@ function GetAssignmentsFilesPath($teacher_id)
 
 
     // File path = AssignmentsFiles/[School_Year]/Quarter[1,2,3,4...]/Teacher[teacher_ID]/.
-    $mp = DBGet( "SELECT MARKING_PERIOD_ID
-    FROM SCHOOL_MARKING_PERIODS
-    WHERE MP='QTR'
-    AND '" . date('Y-m-d') . "' BETWEEN START_DATE AND END_DATE
-    AND SYEAR='" . $DefaultSyear . "'
-    AND SCHOOL_ID='" . $schoolID . "'" );
 
-    return $AssignmentsFilesPath . $DefaultSyear . '/Quarter' . $mp[1]['MARKING_PERIOD_ID'] . '/Teacher' . $teacher_id . '/';
+
+    return $AssignmentsFilesPath . 2019 . '/Quarter' . 4 . '/Teacher' . $teacher_id . '/';
 
 }
 

@@ -56,11 +56,13 @@ function GetQuizForStudents($student_id, $course_period_id)
 
 function GetTheGrade($percent)
 {
-
-    $query = "SELECT title, break_off
-FROM REPORT_CARD_GRADES WHERE GRADE_SCALE_ID='1' AND SYEAR='2019'
-AND SCHOOL_ID='1'
-ORDER BY BREAK_OFF IS NOT NULL DESC, BREAK_OFF DESC, SORT_ORDER";
+    global $DefaultSyear, $schoolID;
+    $query = "SELECT REPORT_CARD_GRADES.title, REPORT_CARD_GRADES.break_off
+    FROM REPORT_CARD_GRADES, REPORT_CARD_GRADE_SCALES 
+    WHERE REPORT_CARD_GRADES.grade_scale_id =  REPORT_CARD_GRADE_SCALES.id
+    AND REPORT_CARD_GRADE_SCALES.SCHOOL_ID = ".$schoolID."
+    AND REPORT_CARD_GRADE_SCALES.SYEAR = ".$DefaultSyear."
+    ORDER BY REPORT_CARD_GRADES.BREAK_OFF IS NOT NULL DESC, REPORT_CARD_GRADES.BREAK_OFF DESC, REPORT_CARD_GRADES.SORT_ORDER";
 
     $rows = DBGet($query, array(), array());
 

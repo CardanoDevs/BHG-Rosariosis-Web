@@ -1,0 +1,405 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Jitsi Meet module for RosarioSIS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-04 19:47+0200\n"
+"PO-Revision-Date: 2020-05-04 19:51+0200\n"
+"Last-Translator: François Jacquet <info@rosariosis.org>\n"
+"Language-Team: RosarioSIS <info@rosariosis.org>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: dgettext:2;ngettext:2;ListOutput:3,4\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Configuration.php:22
+msgid "The module configuration has been modified."
+msgstr "La configuración del módulo ha sido modificada."
+
+#: Configuration.php:41 Menu.php:17
+msgid "Configuration"
+msgstr ""
+
+#: Configuration.php:44
+msgid ""
+"The domain the Jitsi Meet server runs. Defaults to their free hosted service."
+msgstr ""
+"El dominio en el cual el servidor Jitsi Meet corre. Por defecto es el "
+"servicio alojado gratis."
+
+#: Configuration.php:49
+msgid "Domain"
+msgstr "Dominio"
+
+#: Configuration.php:54
+msgid ""
+"The toolbar buttons to display in comma separated format. For more "
+"information refer to <a target=\"_blank\" href=\"https://github.com/jitsi/"
+"jitsi-meet/blob/master/interface_config.js#L49\">TOOLBAR_BUTTONS</a>."
+msgstr ""
+"Los botones de la barra de herramientas que mostrar, en formato separado por "
+"coma. Para más informaciones, referirse a <a target=\"_blank\" href="
+"\"https://github.com/jitsi/jitsi-meet/blob/master/interface_config."
+"js#L49\">TOOLBAR_BUTTONS</a>."
+
+#: Configuration.php:59
+msgid "Toolbar"
+msgstr "Barra de herramientas"
+
+#: Configuration.php:64
+msgid ""
+"The settings available in comma separated format. For more information refer "
+"to <a target=\"_blank\" href=\"https://github.com/jitsi/jitsi-meet/blob/"
+"master/interface_config.js#L58\">SETTINGS_SECTION</a>."
+msgstr ""
+"Las opciones disponibles, en formato separado por coma. Para más "
+"informaciones, referirse a <a target=\"_blank\" href=\"https://github.com/"
+"jitsi/jitsi-meet/blob/master/interface_config.js#L58\">SETTINGS_SECTIONS</a>."
+
+#: Configuration.php:69
+msgid "Settings"
+msgstr "Opciones"
+
+#: Configuration.php:73
+msgid "The width in pixels or percentage of the embedded window."
+msgstr "Lo ancho en píxeles o porcentaje de la ventana incrustada."
+
+#: Configuration.php:78
+msgid "Width"
+msgstr "Ancho"
+
+#: Configuration.php:83
+msgid "The height in pixels or percentage of the embedded window."
+msgstr "La altura en píxeles o porcentaje de la ventana incrustada."
+
+#: Configuration.php:88
+msgid "Height"
+msgstr "Altura"
+
+#: Configuration.php:93
+msgid "The link for the brand watermark."
+msgstr "El enlace de la marca de agua."
+
+#: Configuration.php:98
+msgid "Brand Watermark Link"
+msgstr "Enlace de la Marca de Agua"
+
+#: Configuration.php:103
+msgid "Hide/Show the video quality indicator."
+msgstr "Mostrar/Ocultar el indicador de calidad del vídeo."
+
+#: Configuration.php:108
+msgid "Disable Video Quality Indicator"
+msgstr "Inhabilitar el Indicador de Calidad de Vídeo"
+
+#: Menu.php:12 Menu.php:21 Menu.php:29
+msgid "Jitsi Meet"
+msgstr ""
+
+#: Menu.php:14 Menu.php:23 Menu.php:31
+msgid "Meet"
+msgstr "Encontrarse"
+
+#: Menu.php:15 Menu.php:24
+msgid "Setup"
+msgstr "Configuración"
+
+#: Menu.php:16 Menu.php:25
+msgid "My Rooms"
+msgstr "Mis Salones"
+
+#: Rooms.php:36
+msgid "Invitation Sent"
+msgstr "Invitación Enviada"
+
+#: Rooms.php:119
+msgid "Please fill in the required fields"
+msgstr ""
+
+#: Rooms.php:165 Rooms.php:179
+msgid "Add Selected Users to Room"
+msgstr "Agregar los Usuarios Seleccionados al Salón"
+
+#: Rooms.php:187 includes/Meet.fnc.php:43 includes/Rooms.fnc.php:226
+msgid "User"
+msgid_plural "Users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Rooms.php:187 includes/Rooms.fnc.php:238
+msgid "Student"
+msgid_plural "Students"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Rooms.php:190
+msgid "Remove"
+msgstr ""
+
+#: Rooms.php:209 includes/Meet.fnc.php:41 includes/Meet.fnc.php:59
+#: includes/Rooms.fnc.php:313 includes/Rooms.fnc.php:333
+msgid "Room"
+msgstr "Salón"
+
+#: includes/Meet.fnc.php:42 includes/Rooms.fnc.php:109
+msgid "Description"
+msgstr ""
+
+#: includes/Meet.fnc.php:44
+msgid "Date"
+msgstr ""
+
+#: includes/Meet.fnc.php:60 includes/Rooms.fnc.php:334
+msgid "Rooms"
+msgstr "Salones"
+
+#: includes/Rooms.fnc.php:81
+msgid "Delete"
+msgstr ""
+
+#: includes/Rooms.fnc.php:86
+msgid "New Room"
+msgstr "Nuevo Salón"
+
+#: includes/Rooms.fnc.php:100
+msgid "Title"
+msgstr ""
+
+#: includes/Rooms.fnc.php:117
+msgid "Password"
+msgstr ""
+
+#: includes/Rooms.fnc.php:121
+msgid ""
+"Every participant enters the room having enabled only their microphone. "
+"Camera is off."
+msgstr ""
+"Todos los participantes entran al salón con solo el micrófono activado. La "
+"cámara está apagada."
+
+#: includes/Rooms.fnc.php:127
+msgid "Start Audio Only"
+msgstr "Comenzar con Audio Solamente"
+
+#: includes/Rooms.fnc.php:149
+msgid "Name"
+msgstr ""
+
+#: includes/Rooms.fnc.php:167
+msgid "Profile"
+msgstr ""
+
+#: includes/Rooms.fnc.php:169
+msgid "Add Users"
+msgstr "Agregar Usuarios"
+
+#: includes/Rooms.fnc.php:188
+msgid "Grade Level"
+msgstr ""
+
+#: includes/Rooms.fnc.php:190
+msgid "Add Students"
+msgstr "Agregar Estudiantes"
+
+#: includes/Rooms.fnc.php:217
+msgid "Email"
+msgstr ""
+
+#: includes/Rooms.fnc.php:265
+msgid "Send Invitation"
+msgstr "Enviar Invitación"
+
+#: includes/Rooms.fnc.php:273
+#, php-format
+msgid "New meeting request in room: %s"
+msgstr "Nueva solicitación de encuentro en el salón: %s"
+
+#: includes/Rooms.fnc.php:278
+#, php-format
+msgid ""
+"%s has invited you to join a meeting in room &quot;%s&quot;:\n"
+"%s\n"
+"<a href=\"%s\">Enter the meeting</a>."
+msgstr ""
+"%s le invita a unirse al encuentro en el salón &quot;%s&quot;:\n"
+"%s\n"
+"<a href=\"%s\">Entrar al encuentro</a>."
+
+#~ msgid ""
+#~ "%s has invited you to join a meeting in room &quot;%s&quot;:\n"
+#~ "%s\n"
+#~ "<a href=\"%s\">Go here to enter the meeting</a>."
+#~ msgstr ""
+#~ "%s le invita a unirse al encuentro en el salón &quot;%s&quot;:\n"
+#~ "%s\n"
+#~ "<a href=\"%s\">Entrar al encuentro</a>."
+
+#~ msgid "Audit Log"
+#~ msgstr "Registro de Auditoría"
+
+#~ msgid "Audit Log cleared."
+#~ msgstr "Registro de Auditoría borrado."
+
+#~ msgid "Audit record"
+#~ msgstr "Entrada de Auditoría"
+
+#~ msgid "Audit records"
+#~ msgstr "Entradas de Auditoría"
+
+#~ msgid "Quiz"
+#~ msgid_plural "Quizzes"
+#~ msgstr[0] "Prueba"
+#~ msgstr[1] "Pruebas"
+
+#~ msgid "Quizzes"
+#~ msgstr "Pruebas"
+
+#~ msgid "Questions"
+#~ msgstr "Preguntas"
+
+#~ msgid "Question"
+#~ msgstr "Pregunta"
+
+#~ msgid "Question Category"
+#~ msgstr "Categoría de Preguntas"
+
+#~ msgid "New Question"
+#~ msgstr "Nueva Pregunta"
+
+#~ msgid "New Question Category"
+#~ msgstr "Nueva Categoría de Preguntas"
+
+#~ msgid "Back to Quizzes"
+#~ msgstr "Volver a las Pruebas"
+
+#~ msgid "New Quiz"
+#~ msgstr "Nueva Prueba"
+
+#~ msgid "Quiz submitted."
+#~ msgstr "Prueba entregada"
+
+#~ msgid "You alreay have graded this Quiz."
+#~ msgstr "Esta Prueba ya ha sido calificada."
+
+#~ msgid "Grade Quiz"
+#~ msgstr "Calificar la Prueba"
+
+#~ msgid "Add Question"
+#~ msgstr "Agregar Pregunta"
+
+#~ msgid "Question Categories"
+#~ msgstr "Categoría de Preguntas"
+
+#~ msgid "Select One from Options"
+#~ msgstr "Selección de Opción Simple"
+
+#~ msgid "Gap Fill"
+#~ msgstr "Llene los Blancos"
+
+#~ msgid "Mark correct answer with an asterisk *."
+#~ msgstr "Marcar las respuestas correctas con un asterisco *."
+
+#~ msgid ""
+#~ "*True\n"
+#~ "False"
+#~ msgstr ""
+#~ "*Correcto\n"
+#~ "Incorrecto"
+
+#~ msgid ""
+#~ "*Correct option #1\n"
+#~ "Wrong option #2\n"
+#~ "Wrong option #3\n"
+#~ "*Correct option #4"
+#~ msgstr ""
+#~ "*Opción correcta #1\n"
+#~ "Opción incorrecta #2\n"
+#~ "Opción incorrecta#3\n"
+#~ "*Opción correcta #4"
+
+#~ msgid "Text with gaps"
+#~ msgstr "Texto con blancos"
+
+#~ msgid "Delimit gaps with double underscores __"
+#~ msgstr "Delimita los blancos con doble guiones bajos __"
+
+#~ msgid ""
+#~ "The sky is __blue__.\n"
+#~ "The grass is __green__."
+#~ msgstr ""
+#~ "El cielo es __azul__.\n"
+#~ "El pasto es __verde__."
+
+#~ msgid "Answer"
+#~ msgstr "Respuesta"
+
+#~ msgid "No Assignments are available. Please add a new Assignment: %s"
+#~ msgstr "No hay Tareas disponibles. Por favor agregue una nueva Tarea: %s"
+
+#~ msgid "Show Correct Answers"
+#~ msgstr "Mostrar las Respuestas Correctas"
+
+#~ msgid "Random Question Order"
+#~ msgstr "Orden de Preguntas Aleatorio"
+
+#~ msgid "You are not allowed to access this quiz."
+#~ msgstr "No está autorizado para acceder a esta prueba."
+
+#~ msgid "Submissions for this quiz are closed."
+#~ msgstr "No es más posible entregar esta prueba."
+
+#~ msgid "Submit Quiz"
+#~ msgstr "Entregar la Prueba"
+
+#~ msgid "Answered"
+#~ msgstr "Respondida"
+
+#~ msgid "Answers"
+#~ msgstr "Respuestas"
+
+#~ msgid "Add New Quiz"
+#~ msgstr "Agregar una Nueva Prueba"
+
+#~ msgid "Quizzes already contain this question."
+#~ msgstr "La pruebas ya contienen esta pregunta."
+
+#~ msgid "Answer (optional)."
+#~ msgstr "Respuesta (opcional)."
+
+#~ msgid "# of Students"
+#~ msgstr "# de Estudiantes"
+
+#~ msgid "# of Administrators"
+#~ msgstr "# de Administradores"
+
+#~ msgid "# of Teachers"
+#~ msgstr "# de Docentes"
+
+#~ msgid "# of Parents"
+#~ msgstr "# de Padres"
+
+#~ msgid "Create Subject PDF for Selected Students"
+#~ msgstr "Crear el PDF Materia para los Estudiantes Seleccionados"
+
+#~ msgid "Quiz Widget"
+#~ msgstr "Widget de Ejemplo"
+
+#~ msgid "Quiz Resource"
+#~ msgstr "Recurso de Ejemplo"
+
+#~ msgid "The configuration value has been modified."
+#~ msgstr "El valor de configuración ha sido modificado."
+
+#~ msgid "Quiz module Setup"
+#~ msgstr "Configuración del Módulo Ejemplo"
+
+#~ msgid "Try to enter a non-numeric value"
+#~ msgstr "Intente entrar un valor no numerico"
+
+#~ msgid "Quiz config value label"
+#~ msgstr "Ejemplo de nombre del valor de config"

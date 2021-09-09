@@ -46,12 +46,12 @@ if (isset($_GET['key']) && $_GET['key'] == '12345') {
         ],
         [
             'Name' => 'Tabernacle Baptist Christian Academy',
-            'BaseURL' => 'https://gs4ed.com/assignmenttbca',
+            'BaseURL' => 'https://gs4ed.com/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ',
         ],
         [
             'Name' => 'Local Test School',
             'BaseURL' => 'http://10.10.12.188'
-        ]
+        ],
     ];
     echo ToJSON([
         'Schools' => $schools
