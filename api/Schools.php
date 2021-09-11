@@ -46,7 +46,7 @@ if (isset($_GET['key']) && $_GET['key'] == '12345') {
         ],
         [
             'Name' => 'Tabernacle Baptist Christian Academy',
-            'BaseURL' => 'https://gs4ed.com/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ',
+            'BaseURL' => 'https://gs4ed.com/assignmenttbca56',
         ],
         [
             'Name' => 'Local Test School',

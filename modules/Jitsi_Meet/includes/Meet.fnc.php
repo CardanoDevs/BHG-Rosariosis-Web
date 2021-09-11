@@ -241,8 +241,7 @@ function JitsiMeetJSHTML( $params )
 		$params['lobby'] = "false";
 	}
 	$params = array_replace_recursive( JitsMeetDefaultSettings(), $params );
-	echo '<pre>';
-	print_r($params);exit;
+	
 	$script = sprintf(
 		JitsiMeetInitTemplate(),
 		$params['domain'],

@@ -150,7 +150,6 @@ function GetAuthorizationHeader()
         }
 //        echo 'CASE 3';
         $requestHeaders = apache_request_headers();
-        error_log(json_encode($requestHeaders));
         // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)
         $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
 //        print_r($requestHeaders);

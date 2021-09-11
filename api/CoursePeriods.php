@@ -18,14 +18,16 @@ include_once 'core/MarkingPeriods.fnc.php';
 PerformInitialAuthChecks();
 
 $user = GetAuthData();
-
-$schoolID   = $user->USER->SCHOOL_ID;
-// For students
 if ($user->USER->PROFILE == 'student') {
     $courses = GetCoursePeriodsForStudent($user->USER->USER_ID);
+    $schoolID   = $user->USER->SCHOOL_ID;
 } else {
 
-    $students = (array) $user->USER->STUDENTS;
+    $students   = (array) $user->USER->STUDENTS;
+    
+    $sql        = "SELECT current_school_id FROM staff WHERE staff_id = ".$user->USER->USER_ID;
+    $data       = DBGet($sql);
+    $schoolID   = $data[1]['CURRENT_SCHOOL_ID'] ?: 1;
 
     if ($students) {
 

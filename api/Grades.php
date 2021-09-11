@@ -25,11 +25,16 @@ if (IsParent()) {
 
     $student_ids = GetStudentIdsFromJWT();
 
+    $sql        = "SELECT current_school_id FROM staff WHERE staff_id = ".$user->USER->USER_ID;
+    $data       = DBGet($sql);
+    $schoolID   = $data[1]['CURRENT_SCHOOL_ID'] ?: 1;
+
     if (isset($_GET['student_id']) && in_array($_GET['student_id'], $student_ids)) {
         $student_id = $_GET['student_id'];
     }
 
 } else if (IsStudent()) {
+    $schoolID   = $user->USER->SCHOOL_ID;
     $student_id = $user->USER->USER_ID;
 }
 
