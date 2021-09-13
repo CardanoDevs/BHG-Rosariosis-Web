@@ -221,16 +221,16 @@ function sendNotificationToAllAppStudents($announcement_id, $send_to_parent = fa
     //             from user_fcm_tokens uft, students s
     //             where s.student_id = uft.user_id";
     // }
-    $sql = "insert into announcement_audience (user_id, announcement_id) 
-                select enroll.student_id, $announcement_id as announcement_id 
+    $sql = "insert into announcement_audience (user_id, announcement_id, is_student) 
+                select enroll.student_id, $announcement_id as announcement_id, 'TRUE'
                 from student_enrollment enroll, students s
                 where s.student_id = enroll.student_id
                     AND enroll.syear=".UserSyear();
         DBQuery($sql);
     
         if($send_to_parent) {
-            $sql = "insert into announcement_audience (user_id, announcement_id) 
-                        select staff_id, $announcement_id as announcement_id 
+            $sql = "insert into announcement_audience (user_id, announcement_id, is_student) 
+                        select staff_id, $announcement_id as announcement_id, 'FALSE' 
                         from staff 
                         WHERE profile='parent' AND syear=".UserSyear();
             DBQuery($sql);
